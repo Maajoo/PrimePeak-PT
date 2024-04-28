@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './components/Home.jsx';
 import Training from './components/Training.jsx';
 import Customer from './components/Customer.jsx';
+import Calendar from './components/Calendar.jsx'
 
 const router = createBrowserRouter([  // Import components that are used in routes
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([  // Import components that are used in rout
       {
         path: "training",
         element: <Training />,
+      },
+      {
+        path: "calendar",
+        element: <Calendar />,
       },
     ]
   }

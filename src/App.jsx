@@ -14,6 +14,7 @@ function App() {
         <Link to={"/"}>Home</Link>{' '}
         <Link to={"/customer"}>Customer</Link>{' '}
         <Link to={"/training"}>Training</Link>{' '}
+        <Link to={"/calendar"}>Calendar</Link>{' '}
       </nav>
       <Outlet />
     </>
