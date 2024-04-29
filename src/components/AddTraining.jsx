@@ -118,7 +118,7 @@ export default function AddTraining(props) {
                             width={100}
                             height={100}
                             value={training.duration}
-                            valueMax={150}
+                            valueMax={150}  // 2,5h treenit maksimissaan ;)
                             cornerRadius={100}
                             sx={{
                                 [`& .${gaugeClasses.valueText}`]: {
@@ -129,8 +129,8 @@ export default function AddTraining(props) {
                         />
                         <Slider
                             value={training.duration}
-                            min={0}
-                            max={150}
+                            min={0} // 0h treenit minimissään :'(
+                            max={150} // 2,5h treenit maksimissaan ;)
                             onChange={(e) => setTraining({ ...training, duration: e.target.value })}
                             aria-labelledby="training-duration-slider"
                             sx={{ width: 200 }}
