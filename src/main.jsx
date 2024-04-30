@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App.jsx'
 import './index.css'
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 
 import Home from './components/Home.jsx';
 import Training from './components/Training.jsx';
@@ -12,11 +12,9 @@ import Calendar from './components/Calendar.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HashRouter>
     <App />
-    <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/customer" component={Customer} />
       <Route path="/training" component={Training} />
       <Route path="/calendar" component={Calendar} />
-    </Switch>
   </HashRouter>,
 )
