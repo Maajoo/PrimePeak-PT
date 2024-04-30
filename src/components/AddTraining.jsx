@@ -16,6 +16,7 @@ import Slider from '@mui/material/Slider';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
 import Autocomplete from '@mui/material/Autocomplete';
+import { Popper } from "@mui/material";
 
 
 
@@ -35,6 +36,7 @@ export default function AddTraining(props) {
     // state asiakkaille
     const [customers, setCustomers] = useState([]);
 
+    // hae asiakkaat autocompletea varten
     useEffect(() => {
         props.getCustomerList()
             .then(data => setCustomers(data._embedded.customers))
@@ -48,12 +50,6 @@ export default function AddTraining(props) {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
-        setTraining({
-            date: dayjs(),
-            duration: 0,
-            activity: '',
-            customer: null
-        });
         setOpen(true);
     }
 
@@ -98,7 +94,7 @@ export default function AddTraining(props) {
                     Add Training
 
                 </DialogTitle>
-                <DialogContent style={{ height: 500 }}>
+                <DialogContent style={{ height: 600 }}>
 
                     <Stack padding={5}>
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -168,6 +164,11 @@ export default function AddTraining(props) {
                             }}
                             sx={{ width: 300 }}
                             renderInput={(params) => <TextField {...params} label="Customer" />}
+
+                            // Popper varmistaa että dropdown menee vain ylöspäin jotta asiakkaan valitseminen on helpompaa
+                            PopperComponent={({ children, ...props }) => (
+                                <Popper {...props} style={{ width: 300 }} placement="top-start">{children}</Popper>
+                            )}
                         />
                     </Stack>
 

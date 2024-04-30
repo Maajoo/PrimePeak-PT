@@ -7,6 +7,7 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import dayjs from 'dayjs'
 
 import AddTraining from "./AddTraining"
+import Chart from "./Chart"
 
 export default function Training() {
 
@@ -76,18 +77,18 @@ export default function Training() {
     const deleteTraining = (params) => {
         if (window.confirm("Are you sure?")) {
             console.log("POISTETTAVA URL " + 'https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id)
-                fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id, { method: 'DELETE' })
-                    .then(response => {
-                        if (response.ok) {
-                            // setOpenSnackbar(true)
-                            // setMsgSnackbar("Delete OK!")
-                            getTrainings()
-                        }
-                        // else {
-                        //     setOpenSnackbar(true)
-                        //     setMsgSnackbar("Delete not OK!")
-                        // }
-                    })
+            fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        // setOpenSnackbar(true)
+                        // setMsgSnackbar("Delete OK!")
+                        getTrainings()
+                    }
+                    // else {
+                    //     setOpenSnackbar(true)
+                    //     setMsgSnackbar("Delete not OK!")
+                    // }
+                })
                 .catch(error => console.error(error))
         }
 
@@ -97,6 +98,7 @@ export default function Training() {
         <>
             <h1 style={{ font: "caption", fontSize: 30 }}>This is the Training page</h1>
             <AddTraining addTraining={addTraining} getCustomerList={getCustomerList} />
+            <Chart getTrainings={getTrainings} trainingData={training} />
 
             <div className="ag-theme-material" style={{ width: 1500, height: 500 }}>
                 <AgGridReact
