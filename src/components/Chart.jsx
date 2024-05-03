@@ -26,7 +26,7 @@ export default function Chart({ trainingData }) {
 
     return (
         <>
-            <Button onClick={handleClickChart}>Chart</Button>
+            <button className="iconbutton" style={{height: 61.6}} onClick={handleClickChart}><img src="../public/chart-icon.svg" alt="Chart icon" width={50} height={50} /></button>
             <Dialog
                 fullScreen
                 open={open}

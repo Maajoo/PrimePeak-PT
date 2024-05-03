@@ -1,27 +1,156 @@
 #root {
+  min-width: 1500px;
   max-width: 2280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 1000px;
+
+
+
+  --fc-border-color: #FFFFFF26;
+  --fc-event-bg-color: #1E2121;
+  --fc-event-border-color: white;
+
+  --fc-today-bg-color: #434A4A;
+
+  --fc-button-bg-color: #1E2121;
+  --fc-button-border-color: white;
+  --fc-button-hover-bg-color: #434A4A;
+  --fc-button-hover-border-color: white;
+  --fc-button-active-bg-color: #434A4A;
+  --fc-button-active-border-color: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.ag-header-cell-label {
+  justify-content: center;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.centertable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.Logo:hover {
+  background-color: transparent;
+}
+
+@font-face {
+  font-family: "tourney";
+  src: local("tourney"),
+    url("./fonts/tourney/Tourney-Regular.ttf");
+  font-weight: normal;
+}
+
+.custombutton {
+  
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 30px;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  background-color: #1E2121;
+  transition: 0.3s;
+  width: fit-content;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-color: transparent;
+}
+
+.custombutton:hover {
+  color: #1E2121;
+  background-color: white;
+}
+
+
+
+
+
+
+.iconbutton {
+  margin: 10px;
+  padding-top: 4px;
+  color: white;
+  background-color: #1E2121;
+  transition: 0.3s;
+  width: fit-content;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-color: transparent;
+}
+
+.iconbutton:hover {
+  color: #1E2121;
+  background-color: white;
+}
+
+
+
+
+.nav {
+  font-family: "tourney";
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 35px;
+  padding: 5px;
+  margin-left: 50px;
+  margin-right: 50px;
+  color: white;
+  transition: 0.3s;
+  width: fit-content;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav:hover {
+  color: #1E2121;
+  background-color: white;
+}
+
+.navcurrent {
+
+  font-family: "tourney";
+  font-style: normal;
+  text-decoration: none;
+  font-size: 40px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  color: white;
+  background-color: #333838;
+  transition: 0.3s;
+  width: fit-content;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbg {
+  display: flex;
+  border-radius: 5px;
+  background-color: #1E2121;
+  height: 80px;
+  min-width: 1000px;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

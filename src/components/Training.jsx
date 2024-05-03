@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 import Button from "@mui/material/Button";
 
 import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-material.css";
+import "../ag-grid-theme-builder.css";
 import dayjs from 'dayjs'
+import Snackbar from "@mui/material/Snackbar";
 
 import AddTraining from "./AddTraining"
 import Chart from "./Chart"
@@ -12,17 +13,19 @@ import Chart from "./Chart"
 export default function Training() {
 
     const [training, setTraining] = useState([])
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const [msgSnackbar, setMsgSnackbar] = useState("")
 
     const dateCellRenderer = (params) => {
-        return dayjs(params.value).format('DD-MM-YYYY HH:mm');
+        return dayjs(params.value).format('DD.MM.YYYY HH:mm');
     };
 
     const [columnDefs, setColumnDefs] = useState([
-        { field: 'activity', sortable: true, filter: true, floatingFilter: true },
-        { field: 'duration', sortable: true, filter: true, floatingFilter: true },
-        { field: 'date', sortable: true, filter: true, floatingFilter: true, cellRenderer: dateCellRenderer },
-        { field: 'customer.firstname', sortable: true, filter: true, floatingFilter: true },
-        { field: 'customer.lastname', sortable: true, filter: true, floatingFilter: true },
+        { field: 'activity', sortable: true, filter: true, floatingFilter: true, flex: 2 },
+        { field: 'duration', sortable: true, filter: true, floatingFilter: true, flex: 2 },
+        { field: 'date', sortable: true, filter: true, floatingFilter: true, cellRenderer: dateCellRenderer, flex: 2 },
+        { field: 'customer.firstname', sortable: true, filter: true, floatingFilter: true, flex: 2 },
+        { field: 'customer.lastname', sortable: true, filter: true, floatingFilter: true, flex: 2 },
         { cellRenderer: (params) => <Button size="small" color="error" onClick={() => deleteTraining(params)}>Delete</Button>, width: 120 },
     ]);
 
@@ -33,11 +36,11 @@ export default function Training() {
     const getTrainings = () => {
         fetch('https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings', { method: 'GET' })
             .then(response => {
-                console.log(response)
+                console.log("GET TRAININGS ", response)
                 return response.json()
             })
             .then(responseData => {
-                console.log(responseData)
+                console.log("RESPONSEDATA ", responseData)
                 setTraining(responseData)
             })
             .catch(error => console.error(error))
@@ -61,11 +64,11 @@ export default function Training() {
             .then(response => {
                 console.log(response)
                 if (response.ok) {
-                    // setMsgSnackbar("Training added succesfully!")
-                    // setOpenSnackbar(true)
+                    setMsgSnackbar("Training added succesfully!")
+                    setOpenSnackbar(true)
                     return response.json()
                 } else {
-                    throw new Error("Data wasn't imported correctly")
+                    throw new Error("Add training failed!")
                 }
             })
             .then(data => {
@@ -80,14 +83,14 @@ export default function Training() {
             fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
-                        // setOpenSnackbar(true)
-                        // setMsgSnackbar("Delete OK!")
+                        setOpenSnackbar(true)
+                        setMsgSnackbar("Training deleted succesfully!")
                         getTrainings()
                     }
-                    // else {
-                    //     setOpenSnackbar(true)
-                    //     setMsgSnackbar("Delete not OK!")
-                    // }
+                    else {
+                        setOpenSnackbar(true)
+                        setMsgSnackbar("Delete training failed!")
+                    }
                 })
                 .catch(error => console.error(error))
         }
@@ -96,15 +99,28 @@ export default function Training() {
 
     return (
         <>
-            <h1 style={{ font: "caption", fontSize: 30 }}>This is the Training page</h1>
-            <AddTraining addTraining={addTraining} getCustomerList={getCustomerList} />
-            <Chart getTrainings={getTrainings} trainingData={training} />
-
-            <div className="ag-theme-material" style={{ width: 1500, height: 500 }}>
-                <AgGridReact
-                    rowData={training}
-                    columnDefs={columnDefs}
-                />
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+                <AddTraining addTraining={addTraining} getCustomerList={getCustomerList} />
+                <Chart getTrainings={getTrainings} trainingData={training} />
+            </div>
+            <div className="centertable">
+                <div className="ag-theme-custom" style={{ width: 1500, height: 600 }}>
+                    <AgGridReact
+                        pagination={true}
+                        paginationPageSize={10}
+                        rowData={training}
+                        columnDefs={columnDefs}
+                    />
+                    <Snackbar
+                        open={openSnackbar}
+                        message={msgSnackbar}
+                        autoHideDuration={3000}
+                        onClose={() => {
+                            setOpenSnackbar(false)
+                            setMsgSnackbar("")
+                        }}>
+                    </Snackbar>
+                </div>
             </div>
 
 

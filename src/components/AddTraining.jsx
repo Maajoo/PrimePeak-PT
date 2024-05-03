@@ -4,9 +4,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -14,12 +12,8 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-
 import Autocomplete from '@mui/material/Autocomplete';
 import { Popper } from "@mui/material";
-
-
-
 
 export default function AddTraining(props) {
 
@@ -30,9 +24,6 @@ export default function AddTraining(props) {
         customer: null
     })
 
-
-
-
     // state asiakkaille
     const [customers, setCustomers] = useState([]);
 
@@ -42,9 +33,6 @@ export default function AddTraining(props) {
             .then(data => setCustomers(data._embedded.customers))
             .catch(err => console.error(err));
     }, []);
-
-
-
 
     //open = false, kun ikkuna on kiinni
     const [open, setOpen] = React.useState(false)
@@ -86,9 +74,9 @@ export default function AddTraining(props) {
 
     return (
         <div>
-            <Button onClick={handleClickOpen}>Add</Button>
+            <button className="custombutton" style={{height: 61.6}} onClick={handleClickOpen}>Add</button>
 
-            <Dialog open={open} >
+            <Dialog  open={open} >
                 <DialogTitle>
 
                     Add Training
@@ -145,8 +133,6 @@ export default function AddTraining(props) {
                             required
                         />
                     </Stack>
-
-
 
                     <Stack padding={5}>
                         <Autocomplete

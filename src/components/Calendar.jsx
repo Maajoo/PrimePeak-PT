@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-
 const fetchEvents = async () => {
     const response = await fetch('https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings');
     const data = await response.json();
@@ -21,7 +20,6 @@ const fetchEvents = async () => {
     });
 };
 
-
 export default function Calendar() {
     const [events, setEvents] = useState([]);
 
@@ -30,8 +28,9 @@ export default function Calendar() {
     }, []);
 
     return (
-        <div style={{ width: '1100px' }}>
+        <div style={{ width: 1500, marginTop: 80 }}>
             <FullCalendar
+                nowIndicator={true}
                 plugins={[dayGridPlugin, timeGridPlugin]}
                 initialView="timeGridWeek"
                 events={events}
@@ -46,7 +45,7 @@ export default function Calendar() {
                         meridiem: 'short'
                     }
                 ]}
-                
+
                 firstDay={1} //aloita viikko maanantaista
                 allDaySlot={false} //poista all-day rivi
                 dayHeaderFormat={{ day: 'numeric', weekday: 'short' }} //näytä ylärivillä päivänro/viikonpäivä

@@ -5,7 +5,9 @@ import Button from "@mui/material/Button";
 import React, { useCallback, useRef, } from "react";
 
 import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-material.css";
+import "../ag-grid-theme-builder.css";
+import Snackbar from "@mui/material/Snackbar";
+
 
 import AddCustomer from "./AddCustomer";
 import OpenCustomer from "./OpenCustomer"
@@ -14,12 +16,14 @@ export default function Customer() {
 
     const [customer, setCustomer] = useState([])
     const gridRef = useRef(null);
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const [msgSnackbar, setMsgSnackbar] = useState("")
 
 
     const [columnDefs, setColumnDefs] = useState([
-        { field: 'firstname', sortable: true, filter: true, floatingFilter: true },
-        { field: 'lastname', sortable: true, filter: true, floatingFilter: true },
-        { field: 'email', sortable: true, filter: true, floatingFilter: true },
+        { field: 'firstname', sortable: true, filter: true, floatingFilter: true, flex: 2 },
+        { field: 'lastname', sortable: true, filter: true, floatingFilter: true, flex: 2 },
+        { field: 'email', sortable: true, filter: true, floatingFilter: true, flex: 2 },
 
         { field: 'phone', sortable: true, filter: true, floatingFilter: true, hide: true },
         { field: 'streetaddress', sortable: true, filter: true, floatingFilter: true, hide: true },
@@ -30,7 +34,9 @@ export default function Customer() {
         { cellRenderer: (params) => <Button size="small" color="error" onClick={() => deleteCustomer(params)}>Delete</Button>, width: 120, suppressExport: true },
     ]);
 
-    useEffect(() => getCustomers, [])
+    useEffect(() => {
+        getCustomers();
+    }, []);
 
     const getCustomers = () => {
         fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/customers', { method: 'GET' })
@@ -54,11 +60,11 @@ export default function Customer() {
             .then(response => {
                 console.log(response)
                 if (response.ok) {
-                    // setMsgSnackbar("Customer added succesfully!")
-                    // setOpenSnackbar(true)
+                    setMsgSnackbar("Customer added succesfully!")
+                    setOpenSnackbar(true)
                     return response.json()
                 } else {
-                    throw new Error("Data wasn't imported correctly")
+                    throw new Error("Add customer failed!")
                 }
             })
             .then(data => {
@@ -76,11 +82,11 @@ export default function Customer() {
             .then(response => {
                 console.log(response)
                 if (response.ok) {
-                    // setMsgSnackbar("Customer edited succesfully!")
-                    // setOpenSnackbar(true)
+                    setMsgSnackbar("Customer edited succesfully!")
+                    setOpenSnackbar(true)
                     return response.json()
                 } else {
-                    throw new Error("Data wasn't imported correctly")
+                    throw new Error("Edit customer failed!")
                 }
             })
             .then(data => {
@@ -95,14 +101,14 @@ export default function Customer() {
             fetch(params.data._links.customer.href, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
-                        // setOpenSnackbar(true)
-                        // setMsgSnackbar("Delete OK!")
+                        setOpenSnackbar(true)
+                        setMsgSnackbar("Customer deleted succesfully!")
                         getCustomers()
                     }
-                    // else {
-                    //     setOpenSnackbar(true)
-                    //     setMsgSnackbar("Delete not OK!")
-                    // }
+                    else {
+                        setOpenSnackbar(true)
+                        setMsgSnackbar("Delete customer failed!")
+                    }
                 })
                 .catch(error => console.error(error))
         }
@@ -124,15 +130,29 @@ export default function Customer() {
 
     return (
         <>
-            <h1 style={{ font: "caption", fontSize: 30 }}>This is the Customer page</h1>
-            <Button onClick={onBtnExport}>Download CSV export file</Button>
-            <AddCustomer addCustomer={addCustomer} />
-            <div className="ag-theme-material" style={{ width: 1500, height: 500 }}>
-                <AgGridReact
-                    ref={gridRef}
-                    rowData={customer}
-                    columnDefs={columnDefs}
-                />
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+                <AddCustomer addCustomer={addCustomer} />
+                <button className="iconbutton" onClick={onBtnExport}><img src="../public/download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
+            </div>
+            <div className="centertable">
+                <div className="ag-theme-custom" style={{ width: 1500, height: 600 }}>
+                    <AgGridReact
+                        pagination={true}
+                        paginationPageSize={10}
+                        ref={gridRef}
+                        rowData={customer}
+                        columnDefs={columnDefs}
+                    />
+                    <Snackbar
+                        open={openSnackbar}
+                        message={msgSnackbar}
+                        autoHideDuration={3000}
+                        onClose={() => {
+                            setOpenSnackbar(false)
+                            setMsgSnackbar("")
+                        }}>
+                    </Snackbar>
+                </div>
             </div>
         </>
     );

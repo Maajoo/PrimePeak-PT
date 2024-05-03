@@ -4,9 +4,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
 
 export default function AddCustomer(props) {
 
@@ -39,7 +37,7 @@ export default function AddCustomer(props) {
 
     return (
         <div>
-            <Button onClick={handleClickOpen}>Add</Button>
+            <button className="custombutton" style={{height: 61.6}} onClick={handleClickOpen}>Add</button>
 
             <Dialog open={open}>
                 <DialogTitle>

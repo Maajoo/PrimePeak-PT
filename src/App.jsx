@@ -1,39 +1,32 @@
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './App.css'
+import logo from "/primepeak-logo.svg"
 
 function App() {
 
-
-
   return (
-    <div className="App">
-      <center>
-        <ul>
-          <li><Link to={"/"}>Home</Link></li>
-        <li><Link to={"/customer"}>Customer</Link></li>
-        <li><Link to={"/training"}>Training</Link></li>
-        <li><Link to={"/calendar"}>Calendar</Link></li>
-      </ul>
-    </center>
-        </div >
-    )
-}
+    <div>
 
-//   return (
-//     <>
-//       <div style={{ backgroundColor: "black", color: "white", padding: 20, font: "caption", fontSize: 30 }}>
-//         <h1>Prime Peak</h1>
-//         <h3>Personal training</h3>
-//       </div>
-//       <nav style={{ font: "caption" }}>
-//         <Link to={"/"}>Home</Link>{' '}
-//         <Link to={"/customer"}>Customer</Link>{' '}
-//         <Link to={"/training"}>Training</Link>{' '}
-//         <Link to={"/calendar"}>Calendar</Link>{' '}
-//       </nav>
-//       <Outlet />
-//     </>
-//   )
-// }
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+
+        <NavLink to="/"><img src={logo} alt="Logo"
+          className='Logo'
+          style={{
+            height: 300, width: 300,
+            position: 'relative',
+            zIndex: 2
+          }}
+        /></NavLink>
+
+        <div className="navbg">
+          <NavLink className={({ isActive }) => isActive ? 'navcurrent' : 'nav'} to="/customer">CUSTOMER</NavLink>
+          <NavLink className={({ isActive }) => isActive ? 'navcurrent' : 'nav'} to="/training">TRAINING</NavLink>
+          <NavLink className={({ isActive }) => isActive ? 'navcurrent' : 'nav'} to="/calendar">CALENDAR</NavLink>
+        </div>
+      </div>
+
+    </div >
+  )
+}
 
 export default App
