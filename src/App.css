@@ -44,8 +44,7 @@
 }
 
 .custombutton {
-  
-  font-style: normal;
+  font-family: 'IBM Plex Sans';
   text-decoration: inherit;
   font-size: 30px;
   padding: 10px;
@@ -139,12 +138,20 @@
   border-radius: 5px;
   background-color: #1E2121;
   height: 80px;
-  min-width: 1000px;
+  width: 1200px;
   margin-left: 20px;
   margin-right: 20px;
   align-items: center;
   justify-content: center;
 }
+
+.add-icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-right: 20px;
+}
+
 
 @keyframes logo-spin {
   from {

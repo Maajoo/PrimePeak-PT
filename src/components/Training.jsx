@@ -99,7 +99,7 @@ export default function Training() {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+            <div className="add-icon-container">
                 <AddTraining addTraining={addTraining} getCustomerList={getCustomerList} />
                 <Chart getTrainings={getTrainings} trainingData={training} />
             </div>

@@ -130,7 +130,7 @@ export default function Customer() {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
+            <div className="add-icon-container">
                 <AddCustomer addCustomer={addCustomer} />
                 <button className="iconbutton" onClick={onBtnExport}><img src="../public/download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
             </div>
