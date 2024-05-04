@@ -26,11 +26,10 @@ export default function Chart({ trainingData }) {
 
     return (
         <>
-            <button className="iconbutton" style={{height: 61.6}} onClick={handleClickChart}><img src="../public/chart-icon.svg" alt="Chart icon" width={50} height={50} /></button>
+            <button className="iconbutton" style={{ height: 61.6 }} onClick={handleClickChart}><img src="/chart-icon.svg" alt="Chart icon" width={50} height={50} /></button>
             <Dialog
                 fullScreen
-                open={open}
-            >
+                open={open}>
                 <DialogContent style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <BarChart width={1000} height={500} data={groupedData}>
                         <XAxis dataKey="name" stroke="#8884d8" />
@@ -46,8 +45,9 @@ export default function Chart({ trainingData }) {
                     <Button
                         onClick={handleCancel}
                         variant="contained"
-                        size="large"
-                    >Close</Button>
+                        size="large">
+                        Close
+                    </Button>
                 </div>
             </Dialog>
         </>

@@ -1,14 +1,10 @@
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react"
 import Button from "@mui/material/Button";
-
 import React, { useCallback, useRef, } from "react";
-
 import "ag-grid-community/styles/ag-grid.css";
 import "../ag-grid-theme-builder.css";
 import Snackbar from "@mui/material/Snackbar";
-
-
 import AddCustomer from "./AddCustomer";
 import OpenCustomer from "./OpenCustomer"
 
@@ -19,6 +15,8 @@ export default function Customer() {
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [msgSnackbar, setMsgSnackbar] = useState("")
 
+    //const taulukon pituudelle
+    const [gridApi, setGridApi] = useState(null);
 
     const [columnDefs, setColumnDefs] = useState([
         { field: 'firstname', sortable: true, filter: true, floatingFilter: true, flex: 2 },
@@ -128,15 +126,29 @@ export default function Customer() {
         }
     }, []);
 
+    // Taulukko kasvaa pituutta riippuen pagination asetuksesta sekä objektien määrästä
+    const onGridReady = (params) => {
+        setGridApi(params.api);
+    };
+
+    // Taulukko kasvaa pituutta riippuen pagination asetuksesta sekä objektien määrästä
+    useEffect(() => {
+        if (gridApi) {
+            gridApi.sizeColumnsToFit();
+            gridApi.setDomLayout('autoHeight');
+        }
+    }, [gridApi]);
+
     return (
         <>
             <div className="add-icon-container">
                 <AddCustomer addCustomer={addCustomer} />
-                <button className="iconbutton" onClick={onBtnExport}><img src="../public/download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
+                <button className="iconbutton" onClick={onBtnExport}><img src="/download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
             </div>
             <div className="centertable">
-                <div className="ag-theme-custom" style={{ width: 1500, height: 600 }}>
+                <div className="ag-theme-custom" style={{ width: 1500 }}>
                     <AgGridReact
+                        onGridReady={onGridReady}
                         pagination={true}
                         paginationPageSize={10}
                         ref={gridRef}
@@ -156,6 +168,4 @@ export default function Customer() {
             </div>
         </>
     );
-
-
 }

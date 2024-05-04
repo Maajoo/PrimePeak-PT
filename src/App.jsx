@@ -6,7 +6,6 @@ function App() {
 
   return (
     <div>
-
       <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
 
         <NavLink to="/"><img src={logo} alt="Logo"
@@ -24,7 +23,6 @@ function App() {
           <NavLink className={({ isActive }) => isActive ? 'navcurrent' : 'nav'} to="/calendar">CALENDAR</NavLink>
         </div>
       </div>
-
     </div >
   )
 }

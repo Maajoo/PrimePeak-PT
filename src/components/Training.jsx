@@ -1,12 +1,10 @@
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react"
 import Button from "@mui/material/Button";
-
 import "ag-grid-community/styles/ag-grid.css";
 import "../ag-grid-theme-builder.css";
 import dayjs from 'dayjs'
 import Snackbar from "@mui/material/Snackbar";
-
 import AddTraining from "./AddTraining"
 import Chart from "./Chart"
 
@@ -15,6 +13,9 @@ export default function Training() {
     const [training, setTraining] = useState([])
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [msgSnackbar, setMsgSnackbar] = useState("")
+
+    //const taulukon pituudelle
+    const [gridApi, setGridApi] = useState(null);
 
     const dateCellRenderer = (params) => {
         return dayjs(params.value).format('DD.MM.YYYY HH:mm');
@@ -97,6 +98,19 @@ export default function Training() {
 
     }
 
+    // Taulukko kasvaa pituutta riippuen pagination asetuksesta sekä objektien määrästä
+    const onGridReady = (params) => {
+        setGridApi(params.api);
+    };
+
+    // Taulukko kasvaa pituutta riippuen pagination asetuksesta sekä objektien määrästä
+    useEffect(() => {
+        if (gridApi) {
+            gridApi.sizeColumnsToFit();
+            gridApi.setDomLayout('autoHeight');
+        }
+    }, [gridApi]);
+
     return (
         <>
             <div className="add-icon-container">
@@ -106,6 +120,7 @@ export default function Training() {
             <div className="centertable">
                 <div className="ag-theme-custom" style={{ width: 1500, height: 600 }}>
                     <AgGridReact
+                        onGridReady={onGridReady}
                         pagination={true}
                         paginationPageSize={10}
                         rowData={training}
@@ -126,6 +141,4 @@ export default function Training() {
 
         </>
     );
-
-
 }

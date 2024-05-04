@@ -4,10 +4,10 @@ import { Slide } from 'react-slideshow-image';
 export default function Home() {
 
     const images = [
-        "../public/slides/gym-picture-1.jpg",
-        "../public/slides/gym-picture-2.jpg",
-        "../public/slides/gym-picture-3.jpg",
-        "../public/slides/gym-picture-4.jpg",
+        "/slides/gym-picture-1.jpg",
+        "/slides/gym-picture-2.jpg",
+        "/slides/gym-picture-3.jpg",
+        "/slides/gym-picture-4.jpg",
     ];
 
     return (

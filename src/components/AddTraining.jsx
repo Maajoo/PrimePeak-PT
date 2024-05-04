@@ -19,7 +19,7 @@ export default function AddTraining(props) {
 
     const [training, setTraining] = React.useState({
         date: dayjs(),
-        duration: 0,
+        duration: 1,
         activity: '',
         customer: null
     })
@@ -78,12 +78,9 @@ export default function AddTraining(props) {
 
             <Dialog  open={open} >
                 <DialogTitle>
-
                     Add Training
-
                 </DialogTitle>
                 <DialogContent style={{ height: 600 }}>
-
                     <Stack padding={5}>
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <MobileDateTimePicker
@@ -95,13 +92,13 @@ export default function AddTraining(props) {
                         </LocalizationProvider>
                     </Stack>
 
-
                     <Stack direction={{ xs: 'column' }} alignItems={"center"} padding={2}>
                         Duration (min)
                         <Gauge
                             width={100}
                             height={100}
                             value={training.duration}
+                            valueMin={1} // 1min treenit minimissään :'(
                             valueMax={150}  // 2,5h treenit maksimissaan ;)
                             cornerRadius={100}
                             sx={{
@@ -113,14 +110,13 @@ export default function AddTraining(props) {
                         />
                         <Slider
                             value={training.duration}
-                            min={0} // 0h treenit minimissään :'(
+                            min={1} // 1min treenit minimissään :'(
                             max={150} // 2,5h treenit maksimissaan ;)
                             onChange={(e) => setTraining({ ...training, duration: e.target.value })}
                             aria-labelledby="training-duration-slider"
                             sx={{ width: 200 }}
                         />
                     </Stack>
-
 
                     <Stack alignItems={"center"} paddingTop={5}>
                         <TextField

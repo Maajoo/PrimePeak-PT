@@ -6,8 +6,6 @@
   text-align: center;
   height: 1000px;
 
-
-
   --fc-border-color: #FFFFFF26;
   --fc-event-bg-color: #1E2121;
   --fc-event-border-color: white;
@@ -65,11 +63,6 @@
   background-color: white;
 }
 
-
-
-
-
-
 .iconbutton {
   margin: 10px;
   padding-top: 4px;
@@ -88,9 +81,6 @@
   color: #1E2121;
   background-color: white;
 }
-
-
-
 
 .nav {
   font-family: "tourney";
@@ -114,7 +104,6 @@
 }
 
 .navcurrent {
-
   font-family: "tourney";
   font-style: normal;
   text-decoration: none;
@@ -151,7 +140,6 @@
   justify-content: right;
   margin-right: 20px;
 }
-
 
 @keyframes logo-spin {
   from {

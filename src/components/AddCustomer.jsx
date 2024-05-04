@@ -100,6 +100,7 @@ export default function AddCustomer(props) {
                         onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
                         variant="standard"
                         fullWidth />
+                        
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleSave}>Save</Button>
