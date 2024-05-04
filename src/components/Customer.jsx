@@ -143,7 +143,7 @@ export default function Customer() {
         <>
             <div className="add-icon-container">
                 <AddCustomer addCustomer={addCustomer} />
-                <button className="iconbutton" onClick={onBtnExport}><img src="/download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
+                <button className="iconbutton" onClick={onBtnExport}><img src="./download-csv.svg" alt="Download CSV" width={50} height={50} /></button>
             </div>
             <div className="centertable">
                 <div className="ag-theme-custom" style={{ width: 1500 }}>
