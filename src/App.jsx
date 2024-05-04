@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import './App.css'
-import logo from "./primepeak-logo.svg"
+// import logo from "./public/primepeak-logo.svg"
 
 function App() {
 

@@ -12,8 +12,4 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/primepeak-pt/',
   plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-  },
 })
