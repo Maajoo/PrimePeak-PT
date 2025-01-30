@@ -35,20 +35,20 @@ export default function Training() {
     }, []);
 
     const getTrainings = () => {
-        fetch('https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings', { method: 'GET' })
+        fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings', { method: 'GET' })
             .then(response => {
                 console.log("GET TRAININGS ", response)
                 return response.json()
             })
             .then(responseData => {
-                console.log("RESPONSEDATA ", responseData)
-                setTraining(responseData)
+                console.log("RESPONSEDATA ", responseData._embedded.trainings);
+                setTraining(responseData._embedded.trainings);
             })
             .catch(error => console.error(error))
     }
 
     const getCustomerList = () => {
-        return fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/customers', { method: 'GET' })
+        return fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/customers', { method: 'GET' })
             .then(response => response.json())
             .then(responseData => {
                 return responseData;
@@ -57,7 +57,7 @@ export default function Training() {
     }
 
     const addTraining = (trainings) => {
-        fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings', {
+        fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings', {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(trainings)
@@ -80,8 +80,8 @@ export default function Training() {
 
     const deleteTraining = (params) => {
         if (window.confirm("Are you sure?")) {
-            console.log("POISTETTAVA URL " + 'https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id)
-            fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/trainings/' + params.data.id, { method: 'DELETE' })
+            console.log("POISTETTAVA URL " + 'https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings/' + params.data.id)
+            fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings/' + params.data.id, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
                         setOpenSnackbar(true)

@@ -10,9 +10,9 @@ export default function Calendar() {
     const [events, setEvents] = useState([]);
 
     const fetchEvents = async () => {
-        const response = await fetch('https://customerrestservice-personaltraining.rahtiapp.fi/gettrainings');
+        const response = await fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/trainings');
         const data = await response.json();
-        return data.map((training) => {
+        return data._embedded.trainings.map((training) => {
             // Luo uusi Date objecti training ajankohdan alulle
             const eventStart = new Date(training.date);
             // Lisää training.duration eventStart muuttujaan jotta saadaan treenin pituus

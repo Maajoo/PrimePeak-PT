@@ -37,7 +37,7 @@ export default function Customer() {
     }, []);
 
     const getCustomers = () => {
-        fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/customers', { method: 'GET' })
+        fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/customers', { method: 'GET' })
             .then(response => {
                 console.log("GET CUSTOMERS ", response)
                 return response.json()
@@ -50,7 +50,7 @@ export default function Customer() {
     }
 
     const addCustomer = (customers) => {
-        fetch('https://customerrestservice-personaltraining.rahtiapp.fi/api/customers', {
+        fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/customers', {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(customers)
