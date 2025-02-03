@@ -14,7 +14,7 @@ export default function Home() {
         <>
             <h1 style={{ fontFamily: "IBM Plex Sans", fontSize: 30,}}>Welcome to Prime Peak personal training!</h1>
             <div className="centertable">
-                <div style={{ width: 1500 }}>
+                <div style={{ width: 1500, borderRadius: 25, overflow: 'hidden' }}>
                     <Slide>
                         <div className="each-slide-effect">
                             <div style={{ 'backgroundImage': `url(${images[0]})`, height: 600, width: 1500 }}>
